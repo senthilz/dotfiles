@@ -8,6 +8,7 @@ Plug 'junegunn/fzf'
 Plug 'fatih/vim-go'
 Plug 'hashivim/vim-terraform'
 Plug 'mattn/emmet-vim' 		" HTML
+Plug 'rking/ag.vim'
 "Plug 'mileszs/ack.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'	" git warpper
