@@ -14,6 +14,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'	" git warpper
 Plug 'w0rp/ale'                 " syntax checking and semantic errors
 
+Plug 'NLKNguyen/papercolor-theme'
 call plug#end()
 
 " setup PLug one time 
@@ -25,6 +26,7 @@ call plug#end()
 " map <C-n> :cnext<CR>
 " map <C-m> :cprevious<CR>
 " nnoremap <leader>a :cclose<CR>
+filetype plugin on
 let g:go_auto_type_info = 1
 let g:go_fmt_command = "goimports"
 
@@ -60,8 +62,9 @@ set sw=2
 set si
 set hls
 set autowrite
+set omnifunc=syntaxcomplete#Complete
+set laststatus=2
 
 if exists('+colorcolumn')
   set colorcolumn=120
 endif
-
