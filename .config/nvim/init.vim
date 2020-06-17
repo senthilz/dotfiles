@@ -17,14 +17,17 @@
 "}}}
 
 
+set encoding=utf-8
 call plug#begin("~/.vim/plugged")
+Plug 'airblade/vim-gitgutter'
 Plug 'fatih/vim-go'
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'scrooloose/nerdtree' 		" File explorer
-Plug 'ryanoasis/vim-devicons' " with icon
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'dracula/vim'
+Plug 'vim-airline/vim-airline'
+Plug 'ryanoasis/vim-devicons' " with icon
 call plug#end()
 
 filetype plugin on
@@ -33,15 +36,19 @@ let g:go_auto_type_info = 1
 let g:go_fmt_command = "goimports"
 let g:go_def_mapping_enabled = 0
 
+
 if (has("termguicolors"))
    set termguicolors
- endif
- syntax enable
- colorscheme dracula
+endif
+syntax enable
+colorscheme dracula
 
 
+let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol = 'ƛ'
+let g:webdevicons_enable = 1
+let g:webdevicons_enable_nerdtree = 1
 let g:NERDTreeShowHidden = 1
-let g:NERDTreeMinimalUI = 1
+"let g:NERDTreeMinimalUI = 1
 let g:NERDTreeIgnore = []
 let g:NERDTreeStatusline = ''
 
