@@ -19,6 +19,7 @@
 
 set encoding=utf-8
 call plug#begin("~/.vim/plugged")
+Plug 'mattn/emmet-vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'fatih/vim-go'
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
@@ -43,14 +44,20 @@ endif
 syntax enable
 colorscheme dracula
 
-
-let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol = 'ƛ'
-let g:webdevicons_enable = 1
-let g:webdevicons_enable_nerdtree = 1
-let g:NERDTreeShowHidden = 1
+" NERDTree
 "let g:NERDTreeMinimalUI = 1
 let g:NERDTreeIgnore = []
 let g:NERDTreeStatusline = ''
+let g:NERDTreeShowHidden = 1
+
+let g:DevIconsEnableFoldersOpenClose = 1
+let g:webdevicons_conceal_nerdtree_brackets = 1
+let g:webdevicons_enable = 1
+let g:webdevicons_enable_airline_statusline = 1
+let g:webdevicons_enable_airline_tabline = 1
+let g:webdevicons_enable_flagship_statusline = 1
+let g:webdevicons_enable_nerdtree = 1
+
 
 " Automaticaly close nvim if NERDTree is only thing left open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -105,12 +112,3 @@ nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
 " FZF
 nnoremap <C-p> :FZF<CR>
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-s': 'split',
-  \ 'ctrl-v': 'vsplit'
-  \}
-
-" go-vim
-
-

@@ -11,11 +11,18 @@ Plug 'hashivim/vim-terraform'
 Plug 'mattn/emmet-vim' 		" HTML
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
+Plug 'ryanoasis/vim-devicons' " with icon
 Plug 'tpope/vim-fugitive'	" git warpper
 Plug 'w0rp/ale'                 " syntax checking and semantic errors
 
 Plug 'NLKNguyen/papercolor-theme'
 call plug#end()
+
+let g:webdevicons_enable_nerdtree = 1
+let g:NERDTreeShowHidden = 1
+"let g:NERDTreeMinimalUI = 1
+let g:NERDTreeIgnore = []
+let g:NERDTreeStatusline = ''
 
 " setup PLug one time 
 " curl -fLo ~/.vim/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
