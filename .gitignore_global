@@ -21,8 +21,6 @@ nytprof.out
 *.swp
 *.swo
 .editorconfig
-*.md
 node_modules/
 .netrwhist
 .DS_Store
-Mojolicious/

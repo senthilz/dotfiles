@@ -1,0 +1,10 @@
+junegunn/fzf
+fatih/vim-go
+SirVer/ultisnips
+hashivim/vim-terraform
+mattn/emmet-vim
+rking/ag.vim
+scrooloose/nerdtree
+ryanoasis/vim-devicons
+tpope/vim-fugitive
+w0rp/ale
