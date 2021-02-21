@@ -11,6 +11,22 @@ import (
 	"github.com/go-git/go-git"
 )
 
+var lines []string
+
+func getFileLines(filename string) {
+
+	lines = nil
+	f, err := os.OpenFile(filename, os.O_RDONLY, os.ModePerm)
+	if err != nil {
+		panic(err)
+	}
+	defer f.Close()
+	sc := bufio.NewScanner(f)
+	for sc.Scan() {
+		lines = append(lines, sc.Text())
+	}
+}
+
 // createFolder creates a folder
 func createFolder(folder string, forceCreate int) error {
 
@@ -116,23 +132,13 @@ func main() {
 		log.Println(err)
 	}
 
-	f, err := os.OpenFile(fmt.Sprintf("%s/vim_plugins.txt", repoDir), os.O_RDONLY, os.ModePerm)
-	if err != nil {
-		log.Printf("open file error: %v", err)
-	}
-	defer f.Close()
-
+	getFileLines(fmt.Sprintf("%s/plugins/vim.txt", repoDir))
 	c := make(chan string)
-	sc := bufio.NewScanner(f)
-	counter := 0
-	for sc.Scan() {
-		l := sc.Text() // GET the line string
-		fmt.Println(l)
-		counter++
-		go GitClonePlugin(l, pluginFolder, c)
+	for _, v := range lines {
+		go GitClonePlugin(v, pluginFolder, c)
 	}
 
-	for i := 0; i < counter; i++ {
+	for i := 0; i < len(lines); i++ {
 		log.Printf("%+v\n", <-c)
 	}
 }
