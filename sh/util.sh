@@ -13,15 +13,15 @@ sef() {
 screenshot_folder() {
   case $1 in
     create)
-      local sd=$HOME/Pictures/screenshots/$(date '+%F-%a');
-      mkdir -p $sd 
-      defaults write com.apple.screencapture location $sd
-      ;;
-    jpg)
-      defaults write com.apple.screencapture type jpg
-      ;;
-    *)
-      defaults read com.apple.screencapture 
+    local sd=$HOME/Pictures/screenshots/$(date '+%F-%a');
+  mkdir -p $sd 
+    defaults write com.apple.screencapture location $sd
+    ;;
+  jpg)
+    defaults write com.apple.screencapture type jpg
+    ;;
+  *)
+    defaults read com.apple.screencapture 
 
     esac
-  }
+}
