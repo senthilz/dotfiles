@@ -2,7 +2,7 @@
 dotfiles for macOS using Neovim, Hammerspoon and Tmux
 
 ## Setup
-Clone this repo into your `$HOME` directory. if you prefer any other loction, you should set path to `DOTFILES`  env variable
+Clone this repo into your `$HOME` directory. if you prefer any other loction, you should set that path to `DOTFILES`  env variable
 
 ```
 git clone git@github.com:senthilz/dotfiles.git $HOME/dotfiles
