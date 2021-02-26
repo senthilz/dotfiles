@@ -68,16 +68,20 @@ func CheckEnv(key string, fallback string) string {
 // FindRepoDir find repo dir
 func FindRepoDir(homeDir string) string {
 	var repoDir = CheckEnv("DOTFILES", fmt.Sprintf("%s/dotfiles", homeDir))
-	folderInfo, err := os.Stat(repoDir)
+	var dir  = "";
+	_, err := os.Stat(repoDir)
+	log.Printf("repoDir : %s", repoDir)
 	if os.IsNotExist(err) {
 
 		currentDir, err := os.Getwd()
 		if err != nil {
-			fmt.Println(err)
+			log.Fatal(err)
 		}
-		return currentDir
+		dir = currentDir
+	}  else {
+		dir = repoDir
 	}
-	return folderInfo.Name()
+	return dir
 }
 
 // CreateSymLink creates sym link
