@@ -8,3 +8,4 @@ scrooloose/nerdtree
 ryanoasis/vim-devicons
 tpope/vim-fugitive
 w0rp/ale
+junegunn/fzf.vim
