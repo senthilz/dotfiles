@@ -1,0 +1,4 @@
+bat
+git-delta
+nvim
+fzf
