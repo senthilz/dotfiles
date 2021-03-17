@@ -6,7 +6,6 @@ set autoindent
 set smarttab
 set nu
 set expandtab
-set ruler "for row/column number
 set sts=2
 set ts=2
 set sw=2
@@ -22,6 +21,9 @@ set laststatus=2
 "
 filetype plugin on
 let g:go_auto_type_info = 1
+let g:go_auto_sameids = 1   
+
+
 let g:go_fmt_command = "goimports"
 
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
