@@ -4,7 +4,7 @@ set splitright
 set splitbelow
 set autoindent
 set smarttab
-set nu
+set nu rnu
 set expandtab
 set sts=2
 set ts=2
@@ -14,6 +14,7 @@ set hls
 set autowrite
 set omnifunc=syntaxcomplete#Complete
 set laststatus=2
+set cmdheight=2
 
 
 " -------------------------------
@@ -23,8 +24,21 @@ filetype plugin on
 let g:go_auto_type_info = 1
 let g:go_auto_sameids = 1   
 
-
 let g:go_fmt_command = "goimports"
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
+
+let g:airline#extensions#ale#enabled = 1
+
+" Error and warning signs.
+let g:ale_sign_error = '⤫'
+let g:ale_sign_warning = '⚠'
 
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
@@ -52,3 +66,4 @@ set listchars=tab:▸\ ,eol:¬
 if exists('+colorcolumn')
   set colorcolumn=120
 endif
+
