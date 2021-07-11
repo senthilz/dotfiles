@@ -15,3 +15,8 @@ If you don't have golang installed, just execute this binary `$HOME/dotfiles/set
    
     
 If you run `setup-dotfiles` with `-f 1` flag, it will delete the existing plugins in your $HOME dir and pull the plugins listed in [vim_plugins](https://github.com/senthilz/dotfiles/blob/master/vim_plugins.txt) again
+
+DEPENDENCIES
+
+ripgrep
+[sharkdp/fd](https://github.com/sharkdp/fd) 

@@ -5,23 +5,25 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"path/filepath"
 
 	"github.com/senthilz/dotfiles/helpers"
+	"github.com/senthilz/gutilz"
 )
 
 var names = map[string]string{
-	"tmux.conf":  ".tmux.conf",
-	"perltidyrc": ".perltidyrc",
-	"nvim":       ".config/nvim",
-	//	"vimrc":       ".vimrc",
+	"tmux.conf":   ".tmux.conf",
+	"perltidyrc":  ".perltidyrc",
+	"nvim":        ".config/nvim",
 	"hammerspoon": ".hammerspoon",
 }
 
 func main() {
 
 	homeDir := os.Getenv("HOME")
-	configBase := fmt.Sprintf("%s/.config", homeDir)
-	nvimBase := fmt.Sprintf("%s/nvim", configBase)
+	configBase := filepath.Join(homeDir, ".config")
+	nvimBase := filepath.Join(configBase, "nvim")
+	spoonFolder := filepath.Join(homeDir, ".hammerspoon/Spoons")
 	var repoDir = helpers.FindRepoDir(homeDir)
 	var forceReset int
 	flag.IntVar(&forceReset, "f", 0, "Set to true to recreate plugins")
@@ -31,33 +33,24 @@ func main() {
 	fmt.Printf("forceCreate = %+v\n", forceReset)
 
 	log.Printf("repoDir: %s", repoDir)
-	pluginFolder := fmt.Sprintf("%s/pack/m/start", nvimBase)
-	spoonFolder := fmt.Sprintf("%s/.hammerspoon/Spoons", homeDir)
-
-	folders := []string{pluginFolder, spoonFolder}
-	for _, v := range folders {
-		err := helpers.CreateFolder(v, forceReset)
-		if err != nil {
-			log.Println(err)
-		}
-	}
 
 	for k, v := range names {
 		fmt.Println(k, v)
-		src := fmt.Sprintf("%s/%s", repoDir, k)
-		des := fmt.Sprintf("%s/%s", homeDir, v)
-		helpers.CreateSymLink(src, des, 1)
+		src := filepath.Join(repoDir, k)
+		des := filepath.Join(homeDir, v)
+		fmt.Println("::::---------------->", src, des)
+		gutilz.CreateSymLink(src, des, 1)
+	}
+
+	err := helpers.CreateFolder(spoonFolder, forceReset)
+	if err != nil {
+		log.Println(err)
 	}
 
 	log.Printf("nvimBase = %+v\n", nvimBase)
 
-	helpers.GetFileLines(fmt.Sprintf("%s/plugins/vim.txt", repoDir))
 	c := make(chan string)
 	counter := 0
-	for _, v := range helpers.Lines {
-		counter++
-		go helpers.GitClonePlugin(v, pluginFolder, c)
-	}
 
 	helpers.GetFileLines(fmt.Sprintf("%s/plugins/spoons.txt", repoDir))
 	for _, v := range helpers.Lines {
