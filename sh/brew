@@ -1,0 +1,2 @@
+brew install hammerspoon --cask
+brew install bat git-delta nvim fzf nvim tmux nushell go rustup
