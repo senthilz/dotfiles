@@ -870,4 +870,6 @@ alias nu-open = open
 alias open = ^open
 alias vim = nvim
 alias dotfiles = cd ~/git/hub/senthilz/dotfiles
-def l [] {ls | sort-by modified}
+def l [] {ls -la | sort-by modified}
+use ~/.config/starship/init.nu
+
