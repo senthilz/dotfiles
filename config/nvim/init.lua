@@ -1,2 +1,2 @@
-require("options")
-require("plugins")
+require('senthil.core')
+require('senthil.lazy')
