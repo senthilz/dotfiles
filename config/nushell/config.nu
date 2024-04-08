@@ -866,10 +866,6 @@ $env.config = {
     ]
 }
 
-alias nu-open = open
-alias open = ^open
-alias vim = nvim
-alias dotfiles = cd ~/git/hub/senthilz/dotfiles
 def l [] {ls -sa | sort-by modified}
 use ~/.cache/starship/init.nu
-
+def l [] {ls -la | sort-by modified}
