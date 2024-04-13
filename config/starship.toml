@@ -1,0 +1,24 @@
+add_newline = false
+
+format = '''
+$time $directory $git_branch $git_status$git_metrics $character
+'''
+
+[directory]
+style = 'white'
+truncate_to_repo = false
+truncation_length = 0
+format = "[$path]($style)[$read_only]($read_only_style)"
+
+[azure]
+disabled = true
+[aws]
+disabled = true
+
+[git_branch]
+style = "green"
+format = "[$symbol$branch(:$remote_branch)]($style)"
+
+[time]
+disabled = false
+time_format = '%T'
