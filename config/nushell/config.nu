@@ -869,7 +869,22 @@ $env.config = {
 alias nu-open = open
 alias open = ^open
 alias vim = nvim
+alias ga = git add
+alias gb = git branch
+alias gc = git commit -v
+alias gco = git checkout
+alias gcb = git checkout -b
+alias gd = git diff
+alias gf = git fetch
+alias gl = git pull
+alias gp = git push
+alias gst = git status
+
 alias dotfiles = cd ~/git/hub/senthilz/dotfiles
 def l [] {ls -sa | sort-by modified}
-use ~/.cache/starship/init.nu
 
+def glol [] {
+  git log --pretty=%h»¦«%s»¦«%aN»¦«%aE»¦«%aD -n 25 | lines | split column "»¦«" commit subject name email date | upsert date {|d| $d.date | into datetime}
+}
+
+use ~/.cache/starship/init.nu
