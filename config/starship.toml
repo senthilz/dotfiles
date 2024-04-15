@@ -1,7 +1,7 @@
 add_newline = false
 
 format = '''
-$time $directory $golang $git_branch $git_status $character
+$time $directory $git_branch $character
 '''
 
 [directory]
@@ -23,6 +23,3 @@ format = "[$symbol$branch(:$remote_branch)]($style)"
 disabled = false
 time_format = '%T'
 utc_time_offset = 'local'
-
-[golang]
-format = ' [$symbol($version )($mod_version )]($style)'
