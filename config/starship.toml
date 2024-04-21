@@ -1,8 +1,13 @@
 add_newline = false
 
 format = '''
-$time $directory $git_branch $character
+$time $directory $git_branch$git_status$character
 '''
+
+[character]
+success_symbol = ' [>](green)'
+error_symbol = ' [✗](red)'
+vimcmd_symbol = ' [V](bold green)'
 
 [directory]
 style = 'white'
@@ -16,6 +21,7 @@ disabled = true
 disabled = true
 
 [git_branch]
+always_show_remote = true
 style = "green"
 format = "[$symbol$branch(:$remote_branch)]($style)"
 
@@ -23,3 +29,5 @@ format = "[$symbol$branch(:$remote_branch)]($style)"
 disabled = false
 time_format = '%T'
 utc_time_offset = 'local'
+format = '[$time]($style) '
+style = 'yellow'
