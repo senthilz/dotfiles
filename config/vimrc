@@ -1,0 +1,176 @@
+" ===============================
+" Bootstrap vim-plug Installation
+" ===============================
+if empty(glob(expand('~/.vim/autoload/plug.vim')))
+  " Create the ~/.vim/autoload directory if it doesn't exist
+  call mkdir(expand('~/.vim/autoload'), 'p')
+
+  " Download vim-plug, if failed run the curl manually
+  echo "Installing vim-plug..."
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+  " Reload vim-plug after installation
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" ===============================
+" Plugin Management (Using vim-plug)
+" ===============================
+call plug#begin('~/.vim/plugged')
+
+" General Plugins
+"Plug 'tpope/vim-fugitive'      " Git integration
+Plug 'airblade/vim-gitgutter'  " Git diff in the gutter
+Plug 'preservim/nerdtree'      " File explorer
+"Plug 'vim-airline/vim-airline' " Status bar
+"Plug 'vim-airline/vim-airline-themes'
+"Plug 'ryanoasis/vim-devicons'  " Icons for NERDTree and Airline
+"Plug 'sheerun/vim-polyglot'    " Language pack for syntax highlighting
+Plug 'joshdick/onedark.vim' " colorscheme
+Plug 'senthilz/lsp'
+" Plug 'dense-analysis/ale'
+
+" Go Development
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } " Go development plugin
+
+call plug#end()
+
+" ===============================
+" vim-go Settings
+" ===============================
+" Use gopls as the default Go language server
+let g:go_auto_type_info = 1                 " Show type info automatically
+let g:go_code_completion_enabled = 1
+"let g:go_def_mapping_enabled = 0            " Disable default keybindings for Go definitions
+let g:go_fmt_command = "goimports"          " Use goimports for formatting
+"let g:go_gopls_enabled = 1
+let g:go_highlight_build_constraints = 1    " Highlight build constraints
+let g:go_highlight_fields = 1               " Highlight fields
+let g:go_highlight_functions = 1            " Highlight functions
+let g:go_highlight_methods = 1              " Highlight methods
+let g:go_highlight_operators = 1            " Highlight operators
+let g:go_highlight_types = 1                " Highlight Go types
+"let g:go_list_type = "quickfix"             " Use quickfix window for errors
+"let g:go_metalinter_autosave = 1            " Run linters on save
+let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck'] " Enable specific linters
+
+" ===============================
+" Autocompletion Setup
+" ===============================
+
+autocmd User LspSetup call LspOptionsSet(#{
+        \   aleSupport: v:false,
+        \   autoComplete: v:true,
+        \   autoHighlight: v:true,
+        \   autoHighlightDiags: v:true,
+        \   autoPopulateDiags: v:true,
+        \   completionMatcher: 'case',
+        \   completionMatcherValue: 1,
+        \   diagSignErrorText: 'E>',
+        \   diagSignHintText: 'H>',
+        \   diagSignInfoText: 'I>',
+        \   diagSignWarningText: 'W>',
+        \   echoSignature: v:false,
+        \   hideDisabledCodeActions: v:false,
+        \   highlightDiagInline: v:true,
+        \   hoverInPreview: v:false,
+        \   ignoreMissingServer: v:false,
+        \   keepFocusInDiags: v:true,
+        \   keepFocusInReferences: v:true,
+        \   completionTextEdit: v:true,
+        \   diagVirtualTextAlign: 'above',
+        \   diagVirtualTextWrap: 'default',
+        \   noNewlineInCompletion: v:true,
+        \   omniComplete: v:null,
+        \   outlineOnRight: v:false,
+        \   outlineWinSize: 20,
+        \   semanticHighlight: v:true,
+        \   showDiagInBalloon: v:true,
+        \   showDiagInPopup: v:true,
+        \   showDiagOnStatusLine: v:false,
+        \   showDiagWithSign: v:true,
+        \   showDiagWithVirtualText: v:false,
+        \   showInlayHints: v:false,
+        \   showSignature: v:true,
+        \   snippetSupport: v:false,
+        \   ultisnipsSupport: v:false,
+        \   useBufferCompletion: v:false,
+        \   usePopupInCodeAction: v:false,
+        \   useQuickfixForLocations: v:false,
+        \   vsnipSupport: v:false,
+        \   bufferCompletionTimeout: 100,
+        \   customCompletionKinds: v:false,
+        \   completionKinds: {},
+        \   filterCompletionDuplicates: v:false,
+	\ })
+
+let lspServers = [#{
+            \    name: 'golang',
+            \    filetype: ['go', 'gomod'],
+            \    path: '/home/ubuntu/go/bin/gopls',
+            \    args: ['serve'],
+            \ }]
+autocmd User LspSetup call LspAddServer(lspServers)
+
+" Use omnifunc for autocompletion
+"set completeopt=menuone,longest,preview
+
+" Enable omnifunc for Go files
+autocmd FileType go setlocal omnifunc=lsp#complete
+" Map Enter to confirm completion and move to the next line
+
+" ===============================
+" General Settings
+" ===============================
+set nocompatible              " Disable compatibility with old vi
+syntax on                     " Enable syntax highlighting
+filetype plugin indent on     " Enable filetype detection and indentation
+set encoding=utf-8            " Use UTF-8 encoding
+set number                    " Show line numbers
+set relativenumber            " Show relative line numbers
+set tabstop=2                 " Number of spaces a tab counts for
+set shiftwidth=2              " Number of spaces to use for auto-indent
+set sts=2
+set expandtab                 " Convert tabs to spaces
+set autoindent                " Auto-indent new lines
+set smartindent               " Smart auto-indentation
+set cursorline                " Highlight the current line
+set showmatch                 " Highlight matching brackets
+set wildmenu                  " Enhanced command-line completion
+set lazyredraw                " Faster scrolling in large files
+set hidden                    " Allow switching buffers without saving
+set backspace=indent,eol,start " Make backspace behave as expected
+set scrolloff=5               " Keep 5 lines above/below cursor when scrolling
+set splitbelow                " Open splits below
+set splitright                " Open splits to the right
+set termguicolors             " Enable true color support
+set clipboard+=unnamedplus    " Use system clipboard
+" ===============================
+" Search and Navigation
+" ===============================
+set hlsearch              " Highlight search results
+set incsearch             " Incremental search
+set ignorecase            " Ignore case in searches
+set smartcase             " Override ignorecase if uppercase letters are used
+
+" ===============================
+" Backup and Swap Files
+" ===============================
+set nobackup              " Disable backup files
+set nowritebackup         " Disable write backup
+set noswapfile            " Disable swap files
+
+" ===============================
+" Colorscheme
+" ===============================
+" colorscheme desert " Example colorscheme
+colorscheme onedark " i liked this one  from 
+" ===============================
+" Leader Key
+" ===============================
+let mapleader = "\<Space>" " Set leader key to Space
+" ===============================
+" Maps 
+" ===============================
+nmap <leader>e :NERDTreeToggle<CR>
